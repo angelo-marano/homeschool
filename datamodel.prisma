@@ -1,0 +1,30 @@
+type User {
+  id: ID! @id
+  email: String @unique
+  name: String!
+  posts: [Post!]!
+  comments: [Comment!]!
+  communities: [Community!]!
+}
+
+type Comment {
+  id: ID! @id
+  body: String!
+  author: User @relation(link: INLINE)
+}
+
+type Post {
+  id: ID! @id
+  title: String!
+  body: String!
+  published: Boolean! @default(value: false)
+  author: User @relation(link: INLINE)
+  comments: [Comment!]!
+}
+
+type Community {
+  id: ID! @id
+  title: String!
+  description: String!
+  members: [User!]!
+}
